@@ -4,7 +4,7 @@ There are several ways to go about finding the closest match to a string from ma
 
 For example, the strings 'AWJGFE' and 'AWJ6FE' have a Levenshtein Distance of 1. The only edit needed is to substitute the G for a 6. 
 
-However, how do we choose the 'best' match when several candidates have a Levenshtein Distance of 1. This repository offers a programatic way to break ties using character similarity.
+However, how do we choose the 'best' match when several candidates have a Levenshtein Distance of 1? This repository offers a programatic way to break ties using character similarity.
 
 ### Tiebreaker 
 
