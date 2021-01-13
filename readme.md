@@ -1,26 +1,16 @@
 # Fuzzy Matching Service
 
-Employees write a six character ID on the physical application card, and this is scanned by a machine to collect the application information. For a small number of applications, the ID on an application does not match any valid employee ID. This is likely due to an error in the [Optical Character Recognition](https://en.wikipedia.org/wiki/Optical_character_recognition).
-
-This repository is offers a solution to remedy this issue. There are several ways to go about finding the closest match to a string, also known as ["Fuzzy Matching"](https://en.wikipedia.org/wiki/Approximate_string_matching). This repository uses the [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance), which counts the number of edits needed to get from one string to another. An edit is either a *substitution, insertion, or deletion*.
+There are several ways to go about finding the closest match to a string from many candidates, also known as ["Fuzzy Matching"](https://en.wikipedia.org/wiki/Approximate_string_matching). One of the most common metrics is the [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance), which counts the number of edits needed to get from one string to another. An edit is either a *substitution, insertion, or deletion*.
 
 For example, the strings 'AWJGFE' and 'AWJ6FE' have a Levenshtein Distance of 1. The only edit needed is to substitute the G for a 6. 
 
-### Finding the best match
-
-For each application with an unmatched ID, we calculate the Levenshtein Distance between the ID on the application and every possible employee ID. 
-
-In some cases, there is a single record with Levenshtein Distance of 1. We choose this as the best match.
-
-If there is not a match with a distance of 1 or 2, we say that this record has no match. This is likely not just a simple character recognition problem.
+However, how do we choose the 'best' match when several candidates have a Levenshtein Distance of 1. This repository offers a programatic way to break ties using character similarity.
 
 ### Tiebreaker 
 
-In several cases, there are a few (2-4) matches with a Levenshtein Distance of 1. 
-
 For example, the unmatched string 'AWWYCH' has two possible matches: 'AWWTCH' and 'AW3YCH'. We either must substitute a T for a Y, or substitute a 3 for a W. **How do we decide between these options?**
 
-Several characters have another that are very similar: O and 0, I and 1, B and 8, etc. We need a measure of *character similarity* to determine the best match in these cases.
+Several characters have another that are very similar: O and 0, I and 1, B and 8, etc. We need a *measure of character similarity* to determine the best match in these cases.
 
 ##### Character Similarity 
 
